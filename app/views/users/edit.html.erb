@@ -1,0 +1,35 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+<h2>ユーザー情報の編集</h2>
+
+  <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <%= @user.errors.count %>error
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+        <li>  <%= message %>  </li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+     <%= form_for(@user) do |f|%>
+
+      <div class="form">
+        <h4>名前</h4>
+        <%= f.text_field :name, class: "name"  %>
+        <h4>画像</h4>
+        <%= f.attachment_field :image, class: "user_image" %>
+      </div>
+      <div class="form">
+        <h4>紹介文</h4>
+        <%= f.text_area :introduction, class: "introduction" %>
+      </div>
+        <%= f.submit "更新する" %>
+      <% end %>
+    </div>
+  </div>
+</div>

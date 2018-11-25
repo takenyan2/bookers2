@@ -1,0 +1,43 @@
+   <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+    <%= render "users/list", user: @user, book: @book_new %>
+    </div>
+    <div class="col-sm-8">
+<h2>Book detail</h2>
+
+	<table class="table table-striped">
+		<tr>
+			<th>画像</th>
+			<th>名前</th>
+			<th>感想</th>
+		</tr>
+		<tr>
+			<td>
+				<p>画像</p>
+				<%= attachment_image_tag @user, :image, :fill, 50, 50, format: 'jpeg' %>
+				<br><%= link_to @user.name, user_path(@book.user_id), class: "user_#{@book.user_id}" %></br>
+			</td>
+			<td>
+				<p>タイトル</p>
+				<%= @book.title %>
+			</td>
+			<td>
+				<p>意見</p>
+				<%= @book.opinion %>
+			</td>
+			<td>
+			    <%= link_to "編集", edit_book_path(@book), class: "edit_book_#{@book.id}" %>
+			    <%= link_to "削除", book_path(@book), method: :delete,"data-confirm" => "本当に削除しますか？", class: "destroy_book_#{@book.id}" %>
+			</td>
+		</tr>
+	</table>
+   </div>
+ </div>
+</div>

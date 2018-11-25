@@ -1,0 +1,59 @@
+<div class="main">
+
+      <h2>User info</h2>
+      <table class="table table-striped">
+        <tr>
+          <td>
+            <%= attachment_image_tag user, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg"  %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>名前</p>
+            <%= user.name %>
+          </td>
+          <td>
+        </tr>
+        <tr>
+          <td>
+            <p>紹介文</p>
+            <%= user.introduction %>
+          </td>
+        </tr>
+         <tr>
+          <td>
+            <% if user.id == current_user.id %>
+              <div class="user-edit">
+                <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-wrench" aria-hidden="true">
+                  <%= link_to "ユーザー情報の編集", edit_user_path(current_user.id), class: "edit_user_#{current_user.id}" %>
+                </span></button>
+              </div>
+            <% else %>
+              <div class="user-edit">
+                <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-wrench" aria-hidden="true">
+                  <%= link_to "ユーザー情報の編集", user_path(current_user.id), class: "user_#{current_user.id}" %>
+                </span></button>
+            <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+
+      <h2>新しい本を追加</h2>
+
+        <%= form_for(book) do |f|%>
+
+      <div class="form">
+        <h4>タイトル</h4>
+        <%= f.text_field :title, class: "book_title"  %>
+      </div>
+      <div class="form">
+        <h4>感想</h4>
+        <%= f.text_area :opinion, class: "book_body"  %>
+      </div>
+        <%= f.submit "追加する" %>
+      <% end %>
+</div>
